@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKTA STORE | Top Up Game & Voucher Termurah</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0c10; color: #fff; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1d24; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #f5a623; border-radius: 10px; }
+        
+        .navbar {
+            background: #0f1117;
+            border-bottom: 1px solid #1f232a;
+            padding: 0.8rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .menu-item {
+            color: #9ca3af;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .menu-item:hover, .menu-item.active {
+            color: #f5a623;
+        }
+        
+        /* Banner Slider */
+        .banner-slider {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider-slide {
+            flex-shrink: 0;
+            width: 100%;
+        }
+        .slider-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            object-fit: cover;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        .slider-btn:hover { background: #f5a623; color: #000; }
+        .slider-prev { left: 15px; }
+        .slider-next { right: 15px; }
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .slider-dot.active { background: #f5a623; width: 25px; border-radius: 10px; }
+        
+        /* Banner Free Fire Khusus */
+        .ff-banner {
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px -10px rgba(255,0,0,0.3);
+        }
+        .ff-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .game-card {
+            background: #111317;
+            border: 1px solid #1f232a;
+            border-radius: 20px;
+            padding: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .game-card:hover {
+            border-color: #f5a623;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(245, 166, 35, 0.2);
+        }
+        
+        .game-image-wrapper {
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 0.75rem;
+        }
+        .game-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .game-card:hover .game-image { transform: scale(1.05); }
+        
+        .trending-item {
+            background: #111317;
+            border: 1px solid #1f232a;
+            border-radius: 16px;
+            padding: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .trending-item:hover {
+            border-color: #f5a623;
+            transform: translateX(4px);
+        }
+        
+        .btn-outline {
+            border: 1px solid #2a2f3a;
+            background: transparent;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: #f5a623;
+            color: #f5a623;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f5a623, #e8921a);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            color: #000;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .product-card {
+            background: #111317;
+            border: 1px solid #1f232a;
+            border-radius: 16px;
+            padding: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            border-color: #f5a623;
+            transform: translateY(-2px);
+        }
+        .product-card.active {
+            border-color: #f5a623;
+            background: rgba(245, 166, 35, 0.05);
+        }
+        
+        .input-field {
+            background: #1a1d24;
+            border: 1px solid #2a2f3a;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            color: #fff;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #f5a623;
+        }
+        
+        .payment-method {
+            padding: 0.5rem 1.2rem;
+            background: #1a1d24;
+            border: 1px solid #2a2f3a;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .payment-method:hover, .payment-method.active {
+            border-color: #f5a623;
+            background: rgba(245, 166, 35, 0.1);
+            color: #f5a623;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #111317;
+            border: 1px solid #2a2f3a;
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInUp 0.3s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar { padding: 0.8rem 1rem; }
+            .game-image-wrapper { height: 110px; }
+            .section-title { font-size: 1.1rem; }
+            .slider-btn { width: 30px; height: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-amber-500 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-bolt text-black text-lg"></i>
+                </div>
+                <span class="text-xl font-extrabold text-white">OKTA<span class="text-amber-500">STORE</span></span>
+            </div>
+            
+            <div class="flex flex-wrap gap-4 md:gap-6">
+                <span class="menu-item active" data-page="home">Topup</span>
+                <span class="menu-item" data-page="cek-transaksi">Cek Transaksi</span>
+                <span class="menu-item" data-page="leaderboard">Leaderboard</span>
+                <span class="menu-item" data-page="artikel">Artikel</span>
+                <span class="menu-item" data-page="kalkulator">Kalkulator</span>
+            </div>
+            
+            <button class="btn-outline" id="loginBtn">
+                <i class="fa-regular fa-user"></i> Masuk
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        
+        <!-- HALAMAN HOME -->
+        <div id="homePage">
+            <!-- BANNER SLIDER UTAMA -->
+            <div class="banner-slider" id="mainSlider">
+                <div class="slider-container">
+                    <div class="slider-track" id="mainSliderTrack">
+                        <div class="slider-slide"><img src="banneer atas.webp" alt="Banner Utama" onerror="this.src='https://placehold.co/1200x300/1f2937/f5a623?text=OKTA+STORE'"></div>
+                        <div class="slider-slide"><img src="https://placehold.co/1200x300/1f2937/f5a623?text=Diskon+Spesial+50%25" alt="Banner 2"></div>
+                        <div class="slider-slide"><img src="https://placehold.co/1200x300/1f2937/f5a623?text=Event+Spesial+Bulan+Ini" alt="Banner 3"></div>
+                    </div>
+                    <button class="slider-btn slider-prev" id="mainSliderPrev">‹</button>
+                    <button class="slider-btn slider-next" id="mainSliderNext">›</button>
+                    <div class="slider-dots" id="mainSliderDots"></div>
+                </div>
+            </div>
+            
+            <!-- Hero Banner Promo -->
+            <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-6 mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="bg-amber-500/20 text-amber-500 px-3 py-1 rounded-full text-xs font-bold">🔥 HOT DEAL</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mt-2">DIANGLING MANI</h2>
+                        <p class="text-slate-400">REBEL EMBERFANG</p>
+                        <div class="mt-3">
+                            <span class="text-amber-500 font-bold">GET STARLIGHT ONLY</span>
+                            <span class="text-white text-2xl font-bold ml-2">300</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="heroTopupBtn">
+                        <i class="fa-solid fa-bolt"></i> Top Up Sekarang
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trending -->
+            <div class="mb-8">
+                <div class="section-title">
+                    <i class="fa-solid fa-chart-line text-amber-500"></i>
+                    Trending
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Berikut adalah beberapa produk yang paling populer saat ini.</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="trendingGrid"></div>
+            </div>
+            
+            <!-- Daftar Game -->
+            <div>
+                <div class="section-title">
+                    <i class="fa-solid fa-gamepad text-amber-500"></i>
+                    Semua Game
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="gameGrid"></div>
+            </div>
+        </div>
+        
+        <!-- HALAMAN GAME DETAIL -->
+        <div id="gameDetailPage" style="display: none;">
+            <button class="flex items-center gap-2 text-slate-400 hover:text-amber-500 mb-4 transition" id="backToHomeBtn">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Game
+            </button>
+            
+            <!-- TEMPAT BANNER KHUSUS FREE FIRE -->
+            <div id="ffSpecialBanner"></div>
+            
+            <div id="gameDetailContent"></div>
+            
+            <!-- Form Top Up -->
+            <div class="mt-6 bg-[#111317] border border-[#1f232a] rounded-2xl p-5">
+                <h3 class="font-bold text-lg mb-4">🛒 Top Up Sekarang</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">User ID / Game ID</label>
+                        <input type="text" id="userId" class="input-field" placeholder="Masukkan User ID">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Zone ID (Opsional)</label>
+                        <input type="text" id="zoneId" class="input-field" placeholder="Zone ID">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-xs text-slate-400 mb-2">Pilih Produk</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3" id="productGrid"></div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-xs text-slate-400 mb-2">Metode Pembayaran</label>
+                    <div class="flex flex-wrap gap-3">
+                        <div data-payment="QRIS" class="payment-method">📱 QRIS</div>
+                        <div data-payment="BCA" class="payment-method">🏦 BCA</div>
+                        <div data-payment="DANA" class="payment-method">💜 DANA</div>
+                        <div data-payment="OVO" class="payment-method">🟣 OVO</div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-4 p-3 bg-[#1a1d24] rounded-xl">
+                    <span class="text-slate-400">Total Pembayaran:</span>
+                    <span class="text-amber-500 text-xl font-bold" id="totalPrice">Rp 0</span>
+                </div>
+                
+                <button class="btn-primary w-full py-3" id="submitOrderBtn">
+                    <i class="fa-brands fa-whatsapp"></i> Konfirmasi ke WhatsApp
+                </button>
+            </div>
+        </div>
+        
+        <!-- HALAMAN CEK TRANSAKSI -->
+        <div id="cekTransaksiPage" style="display: none;">
+            <div class="section-title">
+                <i class="fa-regular fa-receipt text-amber-500"></i>
+                Cek Transaksi
+            </div>
+            <div class="bg-[#111317] border border-[#1f232a] rounded-2xl p-6">
+                <p class="text-slate-400 mb-4">Masukkan kode pesanan Anda untuk melacak status transaksi.</p>
+                <div class="flex gap-3 flex-wrap">
+                    <input type="text" id="trackingOrderId" class="input-field flex-1" placeholder="Contoh: OKTA1234567890">
+                    <button class="btn-primary" id="trackingBtn">Cek Pesanan</button>
+                </div>
+                <div id="trackingResult" class="mt-4"></div>
+            </div>
+        </div>
+        
+        <!-- HALAMAN LEADERBOARD -->
+        <div id="leaderboardPage" style="display: none;">
+            <div class="section-title">
+                <i class="fa-solid fa-trophy text-amber-500"></i>
+                Leaderboard Top Up Terbanyak
+            </div>
+            <div class="bg-[#111317] border border-[#1f232a] rounded-2xl overflow-hidden">
+                <div class="grid grid-cols-3 gap-4 p-4 bg-[#1a1d24] text-slate-400 text-sm font-semibold">
+                    <div>Rank</div>
+                    <div>User ID</div>
+                    <div>Total Top Up</div>
+                </div>
+                <div id="leaderboardList"></div>
+            </div>
+        </div>
+        
+        <!-- HALAMAN ARTIKEL -->
+        <div id="artikelPage" style="display: none;">
+            <div class="section-title">
+                <i class="fa-regular fa-newspaper text-amber-500"></i>
+                Artikel & Tips Game
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="artikelList"></div>
+        </div>
+        
+        <!-- HALAMAN KALKULATOR -->
+        <div id="kalkulatorPage" style="display: none;">
+            <div class="section-title">
+                <i class="fa-solid fa-calculator text-amber-500"></i>
+                Kalkulator Diamond
+            </div>
+            <div class="bg-[#111317] border border-[#1f232a] rounded-2xl p-6">
+                <p class="text-slate-400 mb-4">Hitung berapa diamond yang akan Anda dapatkan berdasarkan nominal top up.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Pilih Game</label>
+                        <select id="calcGame" class="input-field">
+                            <option value="ml">Mobile Legends</option>
+                            <option value="ff">Free Fire</option>
+                            <option value="pubg">PUBG Mobile</option>
+                            <option value="valorant">Valorant</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Nominal Top Up (Rp)</label>
+                        <input type="number" id="calcNominal" class="input-field" placeholder="Contoh: 100000">
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-[#1a1d24] rounded-xl">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Diamond yang didapat:</span>
+                        <span class="text-amber-500 text-xl font-bold" id="calcResult">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Masuk ke OKTA STORE</h3>
+                <button id="closeModalBtn" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <input type="text" class="input-field mb-3" placeholder="Email / No. WhatsApp" id="loginEmail">
+            <input type="password" class="input-field mb-4" placeholder="Password" id="loginPassword">
+            <button class="btn-primary w-full" id="doLoginBtn">Masuk</button>
+            <p class="text-center text-slate-500 text-xs mt-4">Belum punya akun? <span class="text-amber-500 cursor-pointer" id="registerLink">Daftar</span></p>
+        </div>
+    </div>
+
+    <script>
+        // NOMOR WHATSAPP ADMIN
+        const WHATSAPP_ADMIN = "85569957725";
+        
+        // ============ DATA GAME LENGKAP ============
+        const games = [
+            { id: "ml", name: "Mobile Legends", dev: "Moonton", image: "banner depan ml.webp", icon: "🎮",
+              products: [
+                { code: "DML5", name: "5 Diamond", price: 1418 },{ code: "DML10", name: "10 Diamond", price: 2836 },
+                { code: "DML20", name: "20 Diamond", price: 5671 },{ code: "DML30", name: "30 Diamond", price: 8080 },
+                { code: "DML50", name: "50 Diamond", price: 13313 },{ code: "DML86", name: "86 Diamond", price: 22176 },
+                { code: "DML100", name: "100 Diamond", price: 25983 },{ code: "DML172", name: "172 Diamond", price: 44298 },
+                { code: "DML200", name: "200 Diamond", price: 51371 },{ code: "DML257", name: "257 Diamond", price: 65855 },
+                { code: "DML300", name: "300 Diamond", price: 76757 },{ code: "DML500", name: "500 Diamond", price: 127265 }
+              ]},
+            { id: "opm", name: "One Punch Man", dev: "FingerFun", image: "banner depan one push.webp", icon: "👊",
+              products: [
+                { code: "OPM227", name: "227 Kupon", price: 469527 },{ code: "OPM321", name: "321 Kupon", price: 522999 },
+                { code: "OPM2669", name: "2669 Kupon", price: 4357499 },{ code: "OPM8007", name: "8007 Kupon", price: 13071999 }
+              ]},
+            { id: "ff", name: "Free Fire", dev: "Garena", image: "banner depan ff.webp", icon: "🔥",
+              specialBanner: "banner atas ff baru.png",
+              products: [
+                { code: "FF5", name: "5 Diamonds", price: 949 },{ code: "FF12", name: "12 Diamonds", price: 1899 },
+                { code: "FF50", name: "50 Diamonds", price: 7599 },{ code: "FF70", name: "70 Diamonds", price: 9499 },
+                { code: "FF140", name: "140 Diamonds", price: 18999 },{ code: "FF355", name: "355 Diamonds", price: 47499 },
+                { code: "FF720", name: "720 Diamonds", price: 94999 },{ code: "FF1450", name: "1450 Diamonds", price: 189999 }
+              ]},
+            { id: "ffmax", name: "Free Fire MAX", dev: "Garena", image: "ff max depan.webp", icon: "⚡",
+              products: [
+                { code: "FFMAX5", name: "5 Diamonds", price: 949 },{ code: "FFMAX12", name: "12 Diamonds", price: 1899 },
+                { code: "FFMAX50", name: "50 Diamonds", price: 7599 },{ code: "FFMAX70", name: "70 Diamonds", price: 9499 },
+                { code: "FFMAX140", name: "140 Diamonds", price: 18999 },{ code: "FFMAX355", name: "355 Diamonds", price: 47499 }
+              ]},
+            { id: "pubg", name: "PUBG Mobile", dev: "Tencent Games", image: "pubg depan.webp", icon: "🎯",
+              products: [
+                { code: "UC60", name: "60 UC", price: 15999 },{ code: "UC325", name: "325 UC", price: 79999 },
+                { code: "UC660", name: "660 UC", price: 159999 },{ code: "UC1800", name: "1800 UC", price: 399999 }
+              ]},
+            { id: "blood", name: "Blood Strike", dev: "NetEase", image: "Blood Strike depan.webp", icon: "🩸",
+              products: [
+                { code: "BS105", name: "100+5 Gold", price: 12290 },{ code: "BS320", name: "300+20 Gold", price: 36868 },
+                { code: "BS540", name: "500+40 Gold", price: 61446 }
+              ]},
+            { id: "valorant", name: "Valorant", dev: "Riot Games", image: "valoran depan.webp", icon: "🔫",
+              products: [
+                { code: "VAL475", name: "475 Points", price: 54999 },{ code: "VAL1000", name: "1000 Points", price: 107999 },
+                { code: "VAL2050", name: "2050 Points", price: 217999 }
+              ]},
+            { id: "arena", name: "Arena Breakout", dev: "Level Infinite", image: "arena depan.webp", icon: "🛡️",
+              products: [
+                { code: "AB66", name: "66 Bonds", price: 14450 },{ code: "AB335", name: "335 Bonds", price: 70550 },
+                { code: "AB675", name: "675 Bonds", price: 141100 }
+              ]}
+        ];
+        
+        const trendingGames = games.slice(0, 6);
+        
+        let currentGame = null;
+        let selectedProduct = null;
+        let selectedMethod = "QRIS";
+        
+        // SLIDER CLASS
+        class Slider {
+            constructor(containerId, trackId, prevId, nextId, dotsId, autoPlay = true) {
+                this.track = document.getElementById(trackId);
+                this.prevBtn = document.getElementById(prevId);
+                this.nextBtn = document.getElementById(nextId);
+                this.dotsContainer = document.getElementById(dotsId);
+                this.slides = this.track ? Array.from(this.track.children) : [];
+                this.currentIndex = 0;
+                this.autoPlay = autoPlay;
+                this.interval = null;
+                if (this.slides.length > 0) this.init();
+            }
+            init() {
+                this.updateSlider();
+                if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
+                if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
+                if (this.autoPlay) this.startAutoPlay();
+            }
+            updateSlider() {
+                if (!this.track) return;
+                this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                if (this.dotsContainer) {
+                    this.dotsContainer.innerHTML = this.slides.map((_, i) => `<div class="slider-dot ${i === this.currentIndex ? 'active' : ''}" data-index="${i}"></div>`).join('');
+                    document.querySelectorAll('.slider-dot').forEach(dot => {
+                        dot.addEventListener('click', (e) => {
+                            this.currentIndex = parseInt(e.target.dataset.index);
+                            this.updateSlider();
+                            this.resetAutoPlay();
+                        });
+                    });
+                }
+            }
+            prev() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateSlider(); this.resetAutoPlay(); }
+            next() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateSlider(); this.resetAutoPlay(); }
+            startAutoPlay() { if (this.autoPlay) this.interval = setInterval(() => this.next(), 5000); }
+            resetAutoPlay() { if (this.autoPlay) { clearInterval(this.interval); this.startAutoPlay(); } }
+        }
+        
+        // RENDER FUNCTIONS
+        function renderTrending() {
+            const container = document.getElementById('trendingGrid');
+            if (!container) return;
+            container.innerHTML = trendingGames.map(game => `
+                <div class="trending-item cursor-pointer" onclick="goToGameDetail('${game.id}')">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#1a1d24] rounded-xl flex items-center justify-center text-xl">${game.icon}</div>
+                        <div>
+                            <div class="font-bold text-sm">${game.name}</div>
+                            <div class="text-xs text-slate-500">${game.dev}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderGames() {
+            const container = document.getElementById('gameGrid');
+            if (!container) return;
+            container.innerHTML = games.map(game => `
+                <div class="game-card cursor-pointer text-center" onclick="goToGameDetail('${game.id}')">
+                    <div class="game-image-wrapper">
+                        <img class="game-image" src="${game.image}" alt="${game.name}" onerror="this.src='https://placehold.co/300x150/1f2937/f5a623?text=${game.name}'">
+                    </div>
+                    <div class="font-bold text-sm mt-2">${game.name}</div>
+                    <div class="text-xs text-slate-500">${game.dev}</div>
+                </div>
+            `).join('');
+        }
+        
+        function goToGameDetail(gameId) {
+            currentGame = games.find(g => g.id === gameId);
+            selectedProduct = null;
+            
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('gameDetailPage').style.display = 'block';
+            document.getElementById('cekTransaksiPage').style.display = 'none';
+            document.getElementById('leaderboardPage').style.display = 'none';
+            document.getElementById('artikelPage').style.display = 'none';
+            document.getElementById('kalkulatorPage').style.display = 'none';
+            
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            
+            // Tampilkan banner khusus Free Fire jika ada
+            const ffBannerContainer = document.getElementById('ffSpecialBanner');
+            if (currentGame.specialBanner) {
+                ffBannerContainer.innerHTML = `
+                    <div class="ff-banner">
+                        <img src="${currentGame.specialBanner}" alt="Free Fire Promo" onerror="this.src='https://placehold.co/1200x300/ff4d4d/f5a623?text=FREE+FIRE+PROMO+50%25'">
+                    </div>
+                `;
+            } else {
+                ffBannerContainer.innerHTML = '';
+            }
+            
+            const container = document.getElementById('gameDetailContent');
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-6">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-24 h-24 rounded-2xl overflow-hidden bg-[#1a1d24] flex items-center justify-center">
+                            <img src="${currentGame.image}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/1f2937/f5a623?text=${currentGame.name}'">
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h2 class="text-2xl md:text-3xl font-bold">${currentGame.name}</h2>
+                            <p class="text-amber-500 text-sm mt-1">${currentGame.dev}</p>
+                            <p class="text-slate-400 text-sm mt-2">Top up ${currentGame.name} dengan harga termurah dan proses super cepat!</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            renderProducts();
+            document.getElementById('userId').value = '';
+            document.getElementById('zoneId').value = '';
+            document.getElementById('totalPrice').innerText = 'Rp 0';
+        }
+        
+        function renderProducts() {
+            const container = document.getElementById('productGrid');
+            if (!container || !currentGame) return;
+            container.innerHTML = currentGame.products.map(product => `
+                <div class="product-card" data-product-code="${product.code}" data-product-name="${product.name}" data-product-price="${product.price}">
+                    <div class="font-bold text-amber-500">${product.code}</div>
+                    <div class="text-xs text-slate-400 mt-1">${product.name}</div>
+                    <div class="text-sm font-bold text-white mt-2">Rp ${product.price.toLocaleString('id-ID')}</div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    selectedProduct = {
+                        name: card.dataset.productName,
+                        price: parseInt(card.dataset.productPrice)
+                    };
+                    document.getElementById('totalPrice').innerText = 'Rp ' + selectedProduct.price.toLocaleString('id-ID');
+                });
+            });
+        }
+        
+        function backToHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('gameDetailPage').style.display = 'none';
+            document.getElementById('cekTransaksiPage').style.display = 'none';
+            document.getElementById('leaderboardPage').style.display = 'none';
+            document.getElementById('artikelPage').style.display = 'none';
+            document.getElementById('kalkulatorPage').style.display = 'none';
+            document.querySelector('.menu-item[data-page="home"]').classList.add('active');
+            currentGame = null;
+            selectedProduct = null;
+        }
+        
+        // SETUP FUNCTIONS
+        function setupPaymentMethods() {
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', () => {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                    method.classList.add('active');
+                    selectedMethod = method.innerText.trim();
+                });
+            });
+            document.querySelector('.payment-method')?.classList.add('active');
+        }
+        
+        function setupOrderButton() {
+            const btn = document.getElementById('submitOrderBtn');
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                if (!currentGame) { alert("⚠️ Pilih game terlebih dahulu!"); return; }
+                const userId = document.getElementById('userId').value;
+                if (!userId) { alert("⚠️ Masukkan User ID Anda!"); return; }
+                if (!selectedProduct) { alert("⚠️ Pilih produk terlebih dahulu!"); return; }
+                
+                const zoneId = document.getElementById('zoneId').value;
+                const zoneText = zoneId ? ` (Zone: ${zoneId})` : "";
+                const message = `Halo OKTA STORE, saya mau top up.%0A%0A` +
+                    `🎮 Game: ${currentGame.name}%0A` +
+                    `🆔 ID Player: ${userId}${zoneText}%0A` +
+                    `📦 Produk: ${selectedProduct.name}%0A` +
+                    `💰 Metode: ${selectedMethod}%0A` +
+                    `📱 Total: Rp ${selectedProduct.price.toLocaleString('id-ID')}%0A%0A` +
+                    `Mohon diproses. Terima kasih! 🙏`;
+                
+                window.open(`https://wa.me/${WHATSAPP_ADMIN}?text=${message}`, '_blank');
+                
+                const history = JSON.parse(localStorage.getItem('okta_history') || '[]');
+                history.unshift({ 
+                    game: currentGame.name, 
+                    product: selectedProduct.name, 
+                    price: selectedProduct.price, 
+                    method: selectedMethod, 
+                    date: new Date().toLocaleString('id-ID'), 
+                    orderId: 'OKTA' + Date.now(),
+                    userId: userId
+                });
+                localStorage.setItem('okta_history', JSON.stringify(history.slice(0, 20)));
+            });
+        }
+        
+        function setupNavigation() {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const page = item.dataset.page;
+                    
+                    document.getElementById('homePage').style.display = 'none';
+                    document.getElementById('gameDetailPage').style.display = 'none';
+                    document.getElementById('cekTransaksiPage').style.display = 'none';
+                    document.getElementById('leaderboardPage').style.display = 'none';
+                    document.getElementById('artikelPage').style.display = 'none';
+                    document.getElementById('kalkulatorPage').style.display = 'none';
+                    
+                    if (page === 'home') {
+                        document.getElementById('homePage').style.display = 'block';
+                    } else if (page === 'cek-transaksi') {
+                        document.getElementById('cekTransaksiPage').style.display = 'block';
+                    } else if (page === 'leaderboard') {
+                        document.getElementById('leaderboardPage').style.display = 'block';
+                        renderLeaderboard();
+                    } else if (page === 'artikel') {
+                        document.getElementById('artikelPage').style.display = 'block';
+                        renderArtikel();
+                    } else if (page === 'kalkulator') {
+                        document.getElementById('kalkulatorPage').style.display = 'block';
+                    }
+                    
+                    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        }
+        
+        function renderLeaderboard() {
+            const history = JSON.parse(localStorage.getItem('okta_history') || '[]');
+            const leaderboard = [];
+            history.forEach(order => {
+                const existing = leaderboard.find(l => l.userId === order.userId);
+                if (existing) {
+                    existing.total += order.price;
+                } else {
+                    leaderboard.push({ userId: order.userId || 'User', total: order.price });
+                }
+            });
+            leaderboard.sort((a, b) => b.total - a.total);
+            
+            const container = document.getElementById('leaderboardList');
+            if (!container) return;
+            if (leaderboard.length === 0) {
+                container.innerHTML = '<div class="p-4 text-center text-slate-500">Belum ada data leaderboard</div>';
+                return;
+            }
+            container.innerHTML = leaderboard.slice(0, 10).map((item, idx) => `
+                <div class="grid grid-cols-3 gap-4 p-4 border-b border-[#1f232a]">
+                    <div class="font-bold ${idx < 3 ? 'text-amber-500' : 'text-white'}">${idx + 1}</div>
+                    <div>${item.userId.substring(0, 15)}${item.userId.length > 15 ? '...' : ''}</div>
+                    <div class="text-amber-500">Rp ${item.total.toLocaleString('id-ID')}</div>
+                </div>
+            `).join('');
+        }
+        
+        function renderArtikel() {
+            const articles = [
+                { title: "Tips Top Up Diamond MLBB Termurah", desc: "Cara mendapatkan diamond Mobile Legends dengan harga terbaik.", date: "15 Maret 2026", icon: "🎮" },
+                { title: "Event Free Fire Maret 2026", desc: "Daftar event terbaru Free Fire dan cara mendapatkan item gratis.", date: "14 Maret 2026", icon: "🔥" },
+                { title: "Strategi Rank Push PUBG Mobile", desc: "Trik naik rank dengan cepat di PUBG Mobile.", date: "13 Maret 2026", icon: "🎯" },
+                { title: "Review Skin Valorant Terbaru", desc: "Review skin senjata Valorant episode terbaru.", date: "12 Maret 2026", icon: "🔫" }
+            ];
+            const container = document.getElementById('artikelList');
+            if (!container) return;
+            container.innerHTML = articles.map(article => `
+                <div class="bg-[#111317] border border-[#1f232a] rounded-xl p-4 hover:border-amber-500 transition">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-[#1a1d24] rounded-xl flex items-center justify-center text-xl">${article.icon}</div>
+                        <div>
+                            <div class="font-bold">${article.title}</div>
+                            <div class="text-xs text-slate-500">${article.date}</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400">${article.desc}</p>
+                    <button class="text-amber-500 text-xs mt-2 hover:underline">Baca selengkapnya →</button>
+                </div>
+            `).join('');
+        }
+        
+        function setupCalculator() {
+            const calcNominal = document.getElementById('calcNominal');
+            const calcGame = document.getElementById('calcGame');
+            const calcResult = document.getElementById('calcResult');
+            
+            function calculate() {
+                const nominal = parseInt(calcNominal.value) || 0;
+                const game = calcGame.value;
+                let rate = 1;
+                if (game === 'ml') rate = 0.0038;
+                else if (game === 'ff') rate = 0.007;
+                else if (game === 'pubg') rate = 0.0037;
+                else if (game === 'valorant') rate = 0.0036;
+                const result = Math.floor(nominal * rate);
+                calcResult.innerText = result.toLocaleString('id-ID');
+            }
+            
+            calcNominal.addEventListener('input', calculate);
+            calcGame.addEventListener('change', calculate);
+        }
+        
+        function setupTracking() {
+            const trackingBtn = document.getElementById('trackingBtn');
+            if (!trackingBtn) return;
+            trackingBtn.addEventListener('click', () => {
+                const orderId = document.getElementById('trackingOrderId').value;
+                const history = JSON.parse(localStorage.getItem('okta_history') || '[]');
+                const order = history.find(h => h.orderId === orderId);
+                const resultDiv = document.getElementById('trackingResult');
+                if (order) {
+                    resultDiv.innerHTML = `
+                        <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                            <p class="text-green-400">✓ Pesanan ditemukan!</p>
+                            <p class="text-sm mt-2">Game: ${order.game}</p>
+                            <p class="text-sm">Produk: ${order.product}</p>
+                            <p class="text-sm">Total: Rp ${order.price.toLocaleString('id-ID')}</p>
+                            <p class="text-sm">Metode: ${order.method}</p>
+                            <p class="text-sm">Status: <span class="text-green-400">Sukses</span></p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                            <p class="text-red-400">✗ Pesanan tidak ditemukan</p>
+                            <p class="text-sm mt-2">Pastikan kode pesanan Anda benar.</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        function setupModal() {
+            const loginBtn = document.getElementById('loginBtn');
+            const modal = document.getElementById('loginModal');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const doLoginBtn = document.getElementById('doLoginBtn');
+            
+            loginBtn.addEventListener('click', () => modal.classList.add('active'));
+            closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+            doLoginBtn.addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                if (email) {
+                    localStorage.setItem('okta_user', email);
+                    alert(`Selamat datang ${email}!`);
+                    modal.classList.remove('active');
+                    loginBtn.innerHTML = `<i class="fa-regular fa-user"></i> ${email.substring(0, 15)}${email.length > 15 ? '...' : ''}`;
+                } else {
+                    alert("Masukkan email atau nomor WhatsApp!");
+                }
+            });
+        }
+        
+        function setupHeroBtn() {
+            const heroBtn = document.getElementById('heroTopupBtn');
+            if (heroBtn) heroBtn.addEventListener('click', () => goToGameDetail('ml'));
+            const backBtn = document.getElementById('backToHomeBtn');
+            if (backBtn) backBtn.addEventListener('click', backToHome);
+        }
+        
+        let mainSlider = null;
+        
+        function init() {
+            renderTrending();
+            renderGames();
+            setupNavigation();
+            setupPaymentMethods();
+            setupOrderButton();
+            setupHeroBtn();
+            setupModal();
+            setupCalculator();
+            setupTracking();
+            mainSlider = new Slider('mainSlider', 'mainSliderTrack', 'mainSliderPrev', 'mainSliderNext', 'mainSliderDots', true);
+        }
+        
+        init();
+    </script>
+</body>
+</html>
