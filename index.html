@@ -2,9 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>OKTA STORE | Top Up Game & Voucher Termurah</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="description" content="Top up diamond Mobile Legends, Free Fire, PUBG Mobile, Valorant dan game populer lainnya. Proses cepat 1-5 menit, harga termurah se-Indonesia.">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
@@ -15,26 +16,156 @@
         ::-webkit-scrollbar-track { background: #1a1d24; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #f5a623; border-radius: 10px; }
         
-        .navbar {
+        @keyframes strobeFlicker {
+            0% { opacity: 1; text-shadow: 0 0 1px #f5a623, 0 0 2px #f5a623; }
+            10% { opacity: 0.85; text-shadow: 0 0 1px #f5a623, 0 0 1px #f5a623; }
+            20% { opacity: 1; text-shadow: 0 0 2px #f5a623, 0 0 4px #f59e0b; }
+            30% { opacity: 0.9; text-shadow: 0 0 1px #f5a623, 0 0 2px #f5a623; }
+            40% { opacity: 1; text-shadow: 0 0 3px #f5a623, 0 0 6px #ffd700; }
+            50% { opacity: 0.8; text-shadow: 0 0 1px #f5a623, 0 0 1px #f5a623; }
+            60% { opacity: 1; text-shadow: 0 0 2px #f5a623, 0 0 5px #f59e0b; }
+            70% { opacity: 0.95; text-shadow: 0 0 1px #f5a623, 0 0 2px #f5a623; }
+            80% { opacity: 1; text-shadow: 0 0 4px #f5a623, 0 0 8px #ffd700; }
+            90% { opacity: 0.85; text-shadow: 0 0 1px #f5a623, 0 0 2px #f5a623; }
+            100% { opacity: 1; text-shadow: 0 0 2px #f5a623, 0 0 4px #f59e0b; }
+        }
+        
+        .flicker-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: strobeFlicker 0.8s ease-in-out infinite;
+        }
+        
+        .top-bar {
             background: #0f1117;
             border-bottom: 1px solid #1f232a;
             padding: 0.8rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #f5a623;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .logo-text span:first-child { color: white; }
+        .logo-text span:last-child { color: #f5a623; }
+        
+        .search-currency {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+            max-width: 500px;
+        }
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        .search-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .search-input-top {
+            width: 100%;
+            background: #1a1d24;
+            border: 1px solid #2a2f3a;
+            border-radius: 40px;
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .search-input-top:focus {
+            outline: none;
+            border-color: #f5a623;
+        }
+        .currency-dropdown {
+            background: #1a1d24;
+            border: 1px solid #2a2f3a;
+            border-radius: 40px;
+            padding: 0.7rem 1rem;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .currency-dropdown:hover {
+            border-color: #f5a623;
         }
         
+        .nav-menu {
+            background: #0f1117;
+            padding: 0.6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid #1f232a;
+        }
+        .menu-items {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
         .menu-item {
             color: #9ca3af;
             transition: all 0.3s;
             cursor: pointer;
             font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
         }
         .menu-item:hover, .menu-item.active {
             color: #f5a623;
         }
+        .menu-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.6rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #f5a623;
+            border-radius: 2px;
+        }
+        .login-btn-top {
+            background: transparent;
+            border: 1px solid #2a2f3a;
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .login-btn-top:hover {
+            border-color: #f5a623;
+            color: #f5a623;
+        }
         
-        /* Banner Slider */
         .banner-slider {
             position: relative;
             border-radius: 24px;
@@ -59,6 +190,7 @@
             height: auto;
             border-radius: 24px;
             object-fit: cover;
+            display: block;
         }
         .slider-btn {
             position: absolute;
@@ -73,6 +205,10 @@
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .slider-btn:hover { background: #f5a623; color: #000; }
         .slider-prev { left: 15px; }
@@ -95,19 +231,6 @@
             transition: all 0.3s;
         }
         .slider-dot.active { background: #f5a623; width: 25px; border-radius: 10px; }
-        
-        /* Banner Free Fire Khusus */
-        .ff-banner {
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 10px 30px -10px rgba(255,0,0,0.3);
-        }
-        .ff-banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
         
         .game-card {
             background: #111317;
@@ -138,32 +261,114 @@
         }
         .game-card:hover .game-image { transform: scale(1.05); }
         
-        .trending-item {
-            background: #111317;
-            border: 1px solid #1f232a;
-            border-radius: 16px;
-            padding: 1rem;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .trending-item:hover {
-            border-color: #f5a623;
-            transform: translateX(4px);
+        .hero-section {
+            margin-bottom: 2rem;
         }
         
-        .btn-outline {
-            border: 1px solid #2a2f3a;
-            background: transparent;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            color: #fff;
-            font-weight: 500;
-            transition: all 0.3s;
-            cursor: pointer;
+        .promo-banner-small {
+            background: linear-gradient(135deg, #f5a62320, #1a1d24);
+            border: 1px solid #f5a62340;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
         }
-        .btn-outline:hover {
+        
+        .promo-banner-small:last-child {
+            margin-bottom: 1.5rem;
+        }
+        
+        .flash-sale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+        .flash-sale-card {
+            background: #111317;
+            border: 1px solid #f5a62340;
+            border-radius: 20px;
+            padding: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .flash-sale-card:hover {
             border-color: #f5a623;
+            transform: translateY(-3px);
+        }
+        .flash-sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        .flash-sale-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            padding-right: 60px;
+        }
+        .flash-sale-game {
+            font-size: 0.8rem;
             color: #f5a623;
+            margin-bottom: 0.75rem;
+        }
+        .flash-sale-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .flash-sale-current {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #f5a623;
+        }
+        .flash-sale-original {
+            font-size: 0.9rem;
+            color: #6b7280;
+            text-decoration: line-through;
+        }
+        .flash-sale-stock {
+            font-size: 0.7rem;
+            color: #9ca3af;
+            margin-bottom: 0.75rem;
+        }
+        .flash-sale-discount {
+            display: inline-block;
+            background: #10b98120;
+            color: #10b981;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+        }
+        .flash-sale-btn {
+            width: 100%;
+            background: #f5a623;
+            color: #000;
+            font-weight: 700;
+            padding: 0.5rem;
+            border-radius: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .flash-sale-btn:hover {
+            background: #e8921a;
+            transform: scale(1.02);
         }
         
         .btn-primary {
@@ -184,27 +389,53 @@
         .section-title {
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .trending-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
         .product-card {
-            background: #111317;
-            border: 1px solid #1f232a;
+            background: #1c1c1c;
+            border: 1px solid #2a2a2a;
             border-radius: 16px;
             padding: 1rem;
-            transition: all 0.3s;
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
+            position: relative;
         }
         .product-card:hover {
             border-color: #f5a623;
-            transform: translateY(-2px);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
         }
         .product-card.active {
             border-color: #f5a623;
-            background: rgba(245, 166, 35, 0.05);
+            background: rgba(245, 158, 11, 0.05);
+        }
+        .product-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 40px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #f5a623;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
         }
         
         .input-field {
@@ -258,57 +489,238 @@
             animation: fadeInUp 0.3s ease;
         }
         
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1f2937;
+            border-left: 4px solid #f5a623;
+            padding: 1rem;
+            border-radius: 12px;
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+        }
+        .notification.show { display: flex; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .chat-widget {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 320px;
+            background: #111317;
+            border: 1px solid #2a2f3a;
+            border-radius: 20px;
+            z-index: 1050;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.5);
+        }
+        .chat-widget.active { display: flex; }
+        .chat-header {
+            background: #f5a623;
+            color: #000;
+            padding: 0.8rem 1rem;
+            border-radius: 20px 20px 0 0;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .chat-message {
+            background: #1a1d24;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            max-width: 85%;
+        }
+        .chat-message.admin {
+            background: #f5a62320;
+            border-left: 3px solid #f5a623;
+            align-self: flex-start;
+        }
+        .chat-message.user {
+            background: #2a2f3a;
+            align-self: flex-end;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 0.8rem;
+            border-top: 1px solid #2a2f3a;
+            gap: 0.5rem;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: #1a1d24;
+            border: 1px solid #2a2f3a;
+            border-radius: 40px;
+            padding: 0.5rem 1rem;
+            color: #fff;
+        }
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: #f5a623;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1040;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        .chat-toggle:hover { transform: scale(1.05); }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            margin-top: 0.5rem;
+        }
+        .stat-card {
+            background: #111317;
+            border: 1px solid #1f232a;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-card:hover { border-color: #f5a623; transform: translateY(-3px); }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #f5a623; }
+        
+        .countdown-timer {
+            background: #1a1d24;
+            border-radius: 16px;
+            padding: 0.6rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+        }
+        .countdown-number {
+            background: #f5a623;
+            color: #000;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+        
+        .footer {
+            background: #111111;
+            border-top: 1px solid #1f232a;
+            margin-top: 4rem;
+        }
+        .social-icon {
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+        .social-icon:hover {
+            color: #f5a623;
+        }
+        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
-            .navbar { padding: 0.8rem 1rem; }
+            .top-bar { flex-direction: column; align-items: stretch; }
+            .search-currency { max-width: 100%; }
+            .nav-menu { flex-direction: column; align-items: stretch; }
+            .menu-items { justify-content: center; }
+            .login-btn-top { align-self: center; }
             .game-image-wrapper { height: 110px; }
-            .section-title { font-size: 1.1rem; }
-            .slider-btn { width: 30px; height: 30px; }
+            .game-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .flash-sale-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-amber-500 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-bolt text-black text-lg"></i>
-                </div>
-                <span class="text-xl font-extrabold text-white">OKTA<span class="text-amber-500">STORE</span></span>
+    <div class="top-bar">
+        <div class="flicker-logo logo-area">
+            <div class="logo-icon">
+                <i class="fa-solid fa-bolt text-black"></i>
             </div>
-            
-            <div class="flex flex-wrap gap-4 md:gap-6">
-                <span class="menu-item active" data-page="home">Topup</span>
-                <span class="menu-item" data-page="cek-transaksi">Cek Transaksi</span>
-                <span class="menu-item" data-page="leaderboard">Leaderboard</span>
-                <span class="menu-item" data-page="artikel">Artikel</span>
-                <span class="menu-item" data-page="kalkulator">Kalkulator</span>
+            <div class="logo-text">
+                <span>OKTA</span><span>STORE</span>
             </div>
-            
-            <button class="btn-outline" id="loginBtn">
-                <i class="fa-regular fa-user"></i> Masuk
-            </button>
         </div>
+        <div class="search-currency">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchGameTop" class="search-input-top" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="currency-dropdown" id="currencyDropdown">
+                <i class="fa-solid fa-flag-checkered"></i> ID / IDR <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+        <button class="login-btn-top" id="loginBtnTop"><i class="fa-regular fa-user"></i> Masuk</button>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <div class="nav-menu">
+        <div class="menu-items">
+            <span class="menu-item active" data-page="home">Topup</span>
+            <span class="menu-item" data-page="cek-transaksi">Cek Transaksi</span>
+            <span class="menu-item" data-page="leaderboard">Leaderboard</span>
+            <span class="menu-item" data-page="artikel">Artikel</span>
+            <span class="menu-item" data-page="kalkulator">Kalkulator</span>
+        </div>
+        <div></div>
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 py-6">
         
-        <!-- HALAMAN HOME -->
         <div id="homePage">
-            <!-- BANNER SLIDER UTAMA -->
             <div class="banner-slider" id="mainSlider">
                 <div class="slider-container">
                     <div class="slider-track" id="mainSliderTrack">
-                        <div class="slider-slide"><img src="banneer atas.webp" alt="Banner Utama" onerror="this.src='https://placehold.co/1200x300/1f2937/f5a623?text=OKTA+STORE'"></div>
-                        <div class="slider-slide"><img src="https://placehold.co/1200x300/1f2937/f5a623?text=Diskon+Spesial+50%25" alt="Banner 2"></div>
-                        <div class="slider-slide"><img src="https://placehold.co/1200x300/1f2937/f5a623?text=Event+Spesial+Bulan+Ini" alt="Banner 3"></div>
+                        <div class="slider-slide"><img src="banneer-slider.webp.jpg" alt="Banner 1" onerror="this.src='https://placehold.co/1200x400/1f2937/f5a623?text=OKTA+STORE'"></div>
+                        <div class="slider-slide"><img src="banner-slider-harith.webp.webp" alt="Banner 2" onerror="this.src='https://placehold.co/1200x400/1f2937/f5a623?text=Premium+Starlight'"></div>
+                        <div class="slider-slide"><img src="banner-slider-kimmy.webp.webp" alt="Banner 3" onerror="this.src='https://placehold.co/1200x400/1f2937/f5a623?text=Exquisite+Collector'"></div>
                     </div>
                     <button class="slider-btn slider-prev" id="mainSliderPrev">‹</button>
                     <button class="slider-btn slider-next" id="mainSliderNext">›</button>
@@ -316,8 +728,7 @@
                 </div>
             </div>
             
-            <!-- Hero Banner Promo -->
-            <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-6 mb-8">
+            <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-6 mb-6 hero-section">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
                         <span class="bg-amber-500/20 text-amber-500 px-3 py-1 rounded-full text-xs font-bold">🔥 HOT DEAL</span>
@@ -334,84 +745,117 @@
                 </div>
             </div>
             
-            <!-- Trending -->
-            <div class="mb-8">
-                <div class="section-title">
-                    <i class="fa-solid fa-chart-line text-amber-500"></i>
-                    Trending
-                </div>
-                <p class="text-slate-400 text-sm mb-4">Berikut adalah beberapa produk yang paling populer saat ini.</p>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="trendingGrid"></div>
+            <div class="promo-banner-small">
+                <div><i class="fa-solid fa-gift text-amber-500"></i> <span class="font-bold">🎉 DISKON 50% UNTUK MEMBER BARU</span> <span class="text-slate-400 text-sm">Gunakan kode NEWBIE50</span></div>
+                <div><i class="fa-solid fa-fire text-amber-500"></i> <span class="font-bold">🔥 EVENT STARLIGHT MLBB: DAPATKAN SKIN GRATIS</span></div>
             </div>
             
-            <!-- Daftar Game -->
+            <div class="promo-banner-small">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <span><i class="fa-regular fa-clock text-amber-500"></i> <span class="font-bold">⏰ FLASH SALE BERAKHIR DALAM:</span></span>
+                    <div class="countdown-timer" id="countdownTimer">
+                        <span class="countdown-number" id="countdownDays">00</span>d
+                        <span class="countdown-number" id="countdownHours">00</span>h
+                        <span class="countdown-number" id="countdownMinutes">00</span>m
+                        <span class="countdown-number" id="countdownSeconds">00</span>s
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fa-solid fa-users text-amber-500 text-3xl mb-2 block"></i>
+                    <div class="stat-number" id="customerCount">10,000+</div>
+                    <div class="text-sm text-slate-400">Pelanggan Puas</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-bolt text-amber-500 text-3xl mb-2 block"></i>
+                    <div class="stat-number">1-5</div>
+                    <div class="text-sm text-slate-400">Menit Proses</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-shield-alt text-amber-500 text-3xl mb-2 block"></i>
+                    <div class="stat-number">100%</div>
+                    <div class="text-sm text-slate-400">Garansi Aman</div>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <div class="section-title">
+                    <i class="fa-solid fa-bolt text-red-500"></i>
+                    ⚡ FLASH SALE
+                </div>
+                <p class="text-slate-400 text-sm mb-3">Pesan sekarang? Persediaan terbatas.</p>
+                <div class="flash-sale-grid" id="flashSaleGrid"></div>
+            </div>
+            
+            <div class="trending-section mb-8">
+                <div class="trending-title">
+                    <i class="fa-solid fa-chart-line text-amber-500"></i>
+                    🔥 TRENDING
+                </div>
+                <div class="trending-subtitle text-slate-400 text-sm mb-4">
+                    Berikut adalah beberapa produk yang paling populer saat ini.
+                </div>
+            </div>
+            
             <div>
                 <div class="section-title">
                     <i class="fa-solid fa-gamepad text-amber-500"></i>
                     Semua Game
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="gameGrid"></div>
+                <div class="game-grid" id="gameGrid"></div>
+            </div>
+            
+            <div class="mt-12">
+                <div class="section-title">
+                    <i class="fa-solid fa-star text-amber-500"></i>
+                    Testimoni Pelanggan
+                </div>
+                <div class="testimonial-grid" id="testimonialGrid"></div>
             </div>
         </div>
         
-        <!-- HALAMAN GAME DETAIL -->
         <div id="gameDetailPage" style="display: none;">
             <button class="flex items-center gap-2 text-slate-400 hover:text-amber-500 mb-4 transition" id="backToHomeBtn">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Game
             </button>
-            
-            <!-- TEMPAT BANNER KHUSUS FREE FIRE -->
-            <div id="ffSpecialBanner"></div>
-            
+            <div id="gameDetailBanner"></div>
+            <div id="gameDetailHero"></div>
             <div id="gameDetailContent"></div>
-            
-            <!-- Form Top Up -->
-            <div class="mt-6 bg-[#111317] border border-[#1f232a] rounded-2xl p-5">
+            <div class="mt-6 bg-[#111317] border border-[#1f232a] rounded-2xl p-5" id="topupFormSection">
                 <h3 class="font-bold text-lg mb-4">🛒 Top Up Sekarang</h3>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">User ID / Game ID</label>
-                        <input type="text" id="userId" class="input-field" placeholder="Masukkan User ID">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">Zone ID (Opsional)</label>
-                        <input type="text" id="zoneId" class="input-field" placeholder="Zone ID">
-                    </div>
+                    <div><label class="block text-xs text-slate-400 mb-1">User ID / Game ID</label><input type="text" id="userId" class="input-field" placeholder="Masukkan User ID"></div>
+                    <div><label class="block text-xs text-slate-400 mb-1">Zone ID (Opsional)</label><input type="text" id="zoneId" class="input-field" placeholder="Zone ID"></div>
                 </div>
-                
                 <div class="mb-4">
                     <label class="block text-xs text-slate-400 mb-2">Pilih Produk</label>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3" id="productGrid"></div>
+                    <div class="product-grid" id="productGrid"></div>
                 </div>
-                
                 <div class="mb-4">
                     <label class="block text-xs text-slate-400 mb-2">Metode Pembayaran</label>
                     <div class="flex flex-wrap gap-3">
                         <div data-payment="QRIS" class="payment-method">📱 QRIS</div>
                         <div data-payment="BCA" class="payment-method">🏦 BCA</div>
+                        <div data-payment="Mandiri" class="payment-method">🏦 Mandiri</div>
                         <div data-payment="DANA" class="payment-method">💜 DANA</div>
                         <div data-payment="OVO" class="payment-method">🟣 OVO</div>
+                        <div data-payment="ShopeePay" class="payment-method">🛒 ShopeePay</div>
                     </div>
                 </div>
-                
                 <div class="flex justify-between items-center mb-4 p-3 bg-[#1a1d24] rounded-xl">
                     <span class="text-slate-400">Total Pembayaran:</span>
                     <span class="text-amber-500 text-xl font-bold" id="totalPrice">Rp 0</span>
                 </div>
-                
                 <button class="btn-primary w-full py-3" id="submitOrderBtn">
                     <i class="fa-brands fa-whatsapp"></i> Konfirmasi ke WhatsApp
                 </button>
             </div>
         </div>
         
-        <!-- HALAMAN CEK TRANSAKSI -->
         <div id="cekTransaksiPage" style="display: none;">
-            <div class="section-title">
-                <i class="fa-regular fa-receipt text-amber-500"></i>
-                Cek Transaksi
-            </div>
+            <div class="section-title"><i class="fa-regular fa-receipt text-amber-500"></i> Cek Transaksi</div>
             <div class="bg-[#111317] border border-[#1f232a] rounded-2xl p-6">
                 <p class="text-slate-400 mb-4">Masukkan kode pesanan Anda untuk melacak status transaksi.</p>
                 <div class="flex gap-3 flex-wrap">
@@ -422,71 +866,37 @@
             </div>
         </div>
         
-        <!-- HALAMAN LEADERBOARD -->
         <div id="leaderboardPage" style="display: none;">
-            <div class="section-title">
-                <i class="fa-solid fa-trophy text-amber-500"></i>
-                Leaderboard Top Up Terbanyak
-            </div>
+            <div class="section-title"><i class="fa-solid fa-trophy text-amber-500"></i> Leaderboard Top Up Terbanyak</div>
             <div class="bg-[#111317] border border-[#1f232a] rounded-2xl overflow-hidden">
                 <div class="grid grid-cols-3 gap-4 p-4 bg-[#1a1d24] text-slate-400 text-sm font-semibold">
-                    <div>Rank</div>
-                    <div>User ID</div>
-                    <div>Total Top Up</div>
+                    <div>Rank</div><div>User ID</div><div>Total Top Up</div>
                 </div>
                 <div id="leaderboardList"></div>
             </div>
         </div>
         
-        <!-- HALAMAN ARTIKEL -->
         <div id="artikelPage" style="display: none;">
-            <div class="section-title">
-                <i class="fa-regular fa-newspaper text-amber-500"></i>
-                Artikel & Tips Game
-            </div>
+            <div class="section-title"><i class="fa-regular fa-newspaper text-amber-500"></i> Artikel & Tips Game</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="artikelList"></div>
         </div>
         
-        <!-- HALAMAN KALKULATOR -->
         <div id="kalkulatorPage" style="display: none;">
-            <div class="section-title">
-                <i class="fa-solid fa-calculator text-amber-500"></i>
-                Kalkulator Diamond
-            </div>
+            <div class="section-title"><i class="fa-solid fa-calculator text-amber-500"></i> Kalkulator Diamond</div>
             <div class="bg-[#111317] border border-[#1f232a] rounded-2xl p-6">
                 <p class="text-slate-400 mb-4">Hitung berapa diamond yang akan Anda dapatkan berdasarkan nominal top up.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-2">Pilih Game</label>
-                        <select id="calcGame" class="input-field">
-                            <option value="ml">Mobile Legends</option>
-                            <option value="ff">Free Fire</option>
-                            <option value="pubg">PUBG Mobile</option>
-                            <option value="valorant">Valorant</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-2">Nominal Top Up (Rp)</label>
-                        <input type="number" id="calcNominal" class="input-field" placeholder="Contoh: 100000">
-                    </div>
+                    <div><label class="block text-sm text-slate-400 mb-2">Pilih Game</label><select id="calcGame" class="input-field"><option value="ml">Mobile Legends</option><option value="ff">Free Fire</option><option value="pubg">PUBG Mobile</option><option value="valorant">Valorant</option></select></div>
+                    <div><label class="block text-sm text-slate-400 mb-2">Nominal Top Up (Rp)</label><input type="number" id="calcNominal" class="input-field" placeholder="Contoh: 100000"></div>
                 </div>
-                <div class="mt-4 p-4 bg-[#1a1d24] rounded-xl">
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Diamond yang didapat:</span>
-                        <span class="text-amber-500 text-xl font-bold" id="calcResult">0</span>
-                    </div>
-                </div>
+                <div class="mt-4 p-4 bg-[#1a1d24] rounded-xl"><div class="flex justify-between"><span class="text-slate-400">Diamond yang didapat:</span><span class="text-amber-500 text-xl font-bold" id="calcResult">0</span></div></div>
             </div>
         </div>
     </div>
     
-    <!-- MODAL LOGIN -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Masuk ke OKTA STORE</h3>
-                <button id="closeModalBtn" class="text-slate-400 hover:text-white text-2xl">&times;</button>
-            </div>
+            <div class="flex justify-between items-center mb-4"><h3 class="text-xl font-bold">Masuk ke OKTA STORE</h3><button id="closeModalBtn" class="text-slate-400 hover:text-white text-2xl">&times;</button></div>
             <input type="text" class="input-field mb-3" placeholder="Email / No. WhatsApp" id="loginEmail">
             <input type="password" class="input-field mb-4" placeholder="Password" id="loginPassword">
             <button class="btn-primary w-full" id="doLoginBtn">Masuk</button>
@@ -494,69 +904,183 @@
         </div>
     </div>
 
+    <div id="notification" class="notification"><i class="fa-solid fa-circle-info text-amber-500"></i><span id="notificationMessage">Pesan</span></div>
+    <div class="chat-toggle" id="chatToggle"><i class="fa-solid fa-comment-dots text-black text-xl"></i></div>
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header"><span><i class="fa-regular fa-message"></i> Live Chat Admin</span><i class="fa-solid fa-xmark cursor-pointer" id="closeChat"></i></div>
+        <div class="chat-messages" id="chatMessages"><div class="chat-message admin">Selamat datang! Ada yang bisa dibantu?</div></div>
+        <div class="chat-input-area"><input type="text" id="chatInput" placeholder="Tulis pesan..."><button id="sendChatBtn" class="btn-primary py-2 px-4">Kirim</button></div>
+    </div>
+
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">OKTA STORE</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        No #1 supplier top up game & voucher terlaris, murah, aman legal 100% buka 24 Jam dengan channel pembayaran terlengkap Indonesia.
+                    </p>
+                    <div class="flex items-center gap-4 mt-3">
+                        <a href="#"><img src="email-logo.png" alt="Email" class="w-6 h-6 hover:opacity-80 transition"></a>
+                        <a href="#"><img src="instagram-logo.png" alt="Instagram" class="w-6 h-6 hover:opacity-80 transition"></a>
+                        <a href="#"><img src="telegram-logo.png" alt="Telegram" class="w-6 h-6 hover:opacity-80 transition"></a>
+                        <a href="#"><img src="facebook-logo.png" alt="Facebook" class="w-6 h-6 hover:opacity-80 transition"></a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-300 text-sm font-medium mb-2">Download App</p>
+                        <a href="#" class="inline-block">
+                            <img src="google-play-android-wedp.webp" alt="Get it on Google Play" class="h-12 w-auto">
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-amber-500 font-bold text-lg mb-4">Partnership</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Reseller</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Web Creation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Affiliate</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Career</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-amber-500 font-bold text-lg mb-4">Site Map</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Reviews</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-amber-500 font-bold text-lg mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Telegram</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition leading-relaxed">Line</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-xs">© 2026 OKTA STORE. All rights reserved.</p>
+                <div class="flex gap-4 text-gray-500 text-xs">
+                    <a href="#" class="hover:text-amber-500 transition">Sitemap</a>
+                    <a href="#" class="hover:text-amber-500 transition">Privacy</a>
+                    <a href="#" class="hover:text-amber-500 transition">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // NOMOR WHATSAPP ADMIN
         const WHATSAPP_ADMIN = "85569957725";
         
-        // ============ DATA GAME LENGKAP ============
         const games = [
-            { id: "ml", name: "Mobile Legends", dev: "Moonton", image: "banner depan ml.webp", icon: "🎮",
+            { id: "ml", name: "Mobile Legends", dev: "Moonton", image: "banner depan ml.webp", icon: "🎮", banner: "banner-mlbb.webp",
               products: [
-                { code: "DML5", name: "5 Diamond", price: 1418 },{ code: "DML10", name: "10 Diamond", price: 2836 },
-                { code: "DML20", name: "20 Diamond", price: 5671 },{ code: "DML30", name: "30 Diamond", price: 8080 },
-                { code: "DML50", name: "50 Diamond", price: 13313 },{ code: "DML86", name: "86 Diamond", price: 22176 },
-                { code: "DML100", name: "100 Diamond", price: 25983 },{ code: "DML172", name: "172 Diamond", price: 44298 },
-                { code: "DML200", name: "200 Diamond", price: 51371 },{ code: "DML257", name: "257 Diamond", price: 65855 },
-                { code: "DML300", name: "300 Diamond", price: 76757 },{ code: "DML500", name: "500 Diamond", price: 127265 }
+                { code: "DML5", name: "5 Diamond", price: 1418, displayName: "5 Diamond", bonusText: "" },
+                { code: "DML10", name: "10 Diamond", price: 2836, displayName: "10 Diamond", bonusText: "" },
+                { code: "DML20", name: "20 Diamond", price: 5671, displayName: "20 Diamond", bonusText: "" },
+                { code: "DML30", name: "30 Diamond", price: 8080, displayName: "30 Diamond", bonusText: "" },
+                { code: "DML50", name: "50 Diamond", price: 13313, displayName: "50 Diamond", bonusText: "" },
+                { code: "DML86", name: "86 Diamond", price: 22176, displayName: "86 Diamond", bonusText: "" },
+                { code: "DML100", name: "100 Diamond", price: 25983, displayName: "100 Diamond", bonusText: "" },
+                { code: "DML172", name: "172 Diamond", price: 44298, displayName: "172 Diamond", bonusText: "" },
+                { code: "DML200", name: "200 Diamond", price: 51371, displayName: "200 Diamond", bonusText: "" },
+                { code: "DML257", name: "257 Diamond", price: 65855, displayName: "257 Diamond", bonusText: "" },
+                { code: "DML300", name: "300 Diamond", price: 76757, displayName: "300 Diamond", bonusText: "" },
+                { code: "DML500", name: "500 Diamond", price: 127265, displayName: "500 Diamond", bonusText: "" },
+                { code: "DML706", name: "706 Diamond", price: 176686, displayName: "706 Diamond", bonusText: "" },
+                { code: "DML1000", name: "1000 Diamond", price: 245195, displayName: "1000 Diamond", bonusText: "" },
+                { code: "DML1412", name: "1412 Diamond", price: 349614, displayName: "1412 Diamond", bonusText: "" },
+                { code: "DML2010", name: "2010 Diamond", price: 469572, displayName: "2010 Diamond", bonusText: "" }
               ]},
-            { id: "opm", name: "One Punch Man", dev: "FingerFun", image: "banner depan one push.webp", icon: "👊",
+            { id: "opm", name: "One Punch Man", dev: "FingerFun", image: "banner depan one push.webp", icon: "👊", banner: "banner-one-punch-man.webp",
               products: [
-                { code: "OPM227", name: "227 Kupon", price: 469527 },{ code: "OPM321", name: "321 Kupon", price: 522999 },
-                { code: "OPM2669", name: "2669 Kupon", price: 4357499 },{ code: "OPM8007", name: "8007 Kupon", price: 13071999 }
+                { code: "OPM227", name: "227 Kupon", price: 469527, displayName: "227 Kupon", bonusText: "" },
+                { code: "OPM321", name: "321 Kupon", price: 522999, displayName: "321 Kupon", bonusText: "" },
+                { code: "OPM2669", name: "2669 Kupon", price: 4357499, displayName: "2669 Kupon", bonusText: "" },
+                { code: "OPM8007", name: "8007 Kupon", price: 13071999, displayName: "8007 Kupon", bonusText: "" },
+                { code: "OPM16013", name: "16013 Kupon", price: 26144999, displayName: "16013 Kupon", bonusText: "" }
               ]},
-            { id: "ff", name: "Free Fire", dev: "Garena", image: "banner depan ff.webp", icon: "🔥",
-              specialBanner: "banner atas ff baru.png",
+            { id: "ff", name: "Free Fire", dev: "Garena", image: "banner depan ff.webp", icon: "🔥", specialBanner: "banner-freefiremax.png",
               products: [
-                { code: "FF5", name: "5 Diamonds", price: 949 },{ code: "FF12", name: "12 Diamonds", price: 1899 },
-                { code: "FF50", name: "50 Diamonds", price: 7599 },{ code: "FF70", name: "70 Diamonds", price: 9499 },
-                { code: "FF140", name: "140 Diamonds", price: 18999 },{ code: "FF355", name: "355 Diamonds", price: 47499 },
-                { code: "FF720", name: "720 Diamonds", price: 94999 },{ code: "FF1450", name: "1450 Diamonds", price: 189999 }
+                { code: "FF5", name: "5 Diamonds", price: 949, displayName: "5 (4+1) Diamonds", bonusText: "+1 Bonus" },
+                { code: "FF12", name: "12 Diamonds", price: 1899, displayName: "12 (10+2) Diamonds", bonusText: "+2 Bonus" },
+                { code: "FF50", name: "50 Diamonds", price: 7599, displayName: "50 (44+6) Diamonds", bonusText: "+6 Bonus" },
+                { code: "FF70", name: "70 Diamonds", price: 9499, displayName: "70 (62+8) Diamonds", bonusText: "+8 Bonus" },
+                { code: "FF140", name: "140 Diamonds", price: 18999, displayName: "140 (125+15) Diamonds", bonusText: "+15 Bonus" },
+                { code: "FF140L", name: "140 Diamonds (Limited)", price: 18099, displayName: "140 (125+15) Diamonds", bonusText: "+15 Bonus Limited" },
+                { code: "FF355", name: "355 Diamonds", price: 47499, displayName: "355 (310+45) Diamonds", bonusText: "+45 Bonus" },
+                { code: "FF355L", name: "355 Diamonds (Limited)", price: 45199, displayName: "355 (310+45) Diamonds", bonusText: "+45 Bonus Limited" },
+                { code: "FF720", name: "720 Diamonds", price: 94999, displayName: "720 (625+95) Diamonds", bonusText: "+95 Bonus" },
+                { code: "FF720L", name: "720 Diamonds (Limited)", price: 90999, displayName: "720 (625+95) Diamonds", bonusText: "+95 Bonus Limited" },
+                { code: "FF1450", name: "1450 Diamonds", price: 189999, displayName: "1450 (1250+200) Diamonds", bonusText: "+200 Bonus" },
+                { code: "FF2180", name: "2180 Diamonds", price: 284999, displayName: "2180 (1850+330) Diamonds", bonusText: "+330 Bonus" },
+                { code: "FF3640", name: "3640 Diamonds", price: 474999, displayName: "3640 (3100+540) Diamonds", bonusText: "+540 Bonus" }
               ]},
-            { id: "ffmax", name: "Free Fire MAX", dev: "Garena", image: "ff max depan.webp", icon: "⚡",
+            { id: "ffmax", name: "Free Fire MAX", dev: "Garena", image: "ff max depan.webp", icon: "⚡", banner: "banner-freefiremax.png",
               products: [
-                { code: "FFMAX5", name: "5 Diamonds", price: 949 },{ code: "FFMAX12", name: "12 Diamonds", price: 1899 },
-                { code: "FFMAX50", name: "50 Diamonds", price: 7599 },{ code: "FFMAX70", name: "70 Diamonds", price: 9499 },
-                { code: "FFMAX140", name: "140 Diamonds", price: 18999 },{ code: "FFMAX355", name: "355 Diamonds", price: 47499 }
+                { code: "FFMAX5", name: "5 Diamonds", price: 949, displayName: "5 (4+1) Diamonds", bonusText: "+1 Bonus" },
+                { code: "FFMAX12", name: "12 Diamonds", price: 1899, displayName: "12 (10+2) Diamonds", bonusText: "+2 Bonus" },
+                { code: "FFMAX50", name: "50 Diamonds", price: 7599, displayName: "50 (44+6) Diamonds", bonusText: "+6 Bonus" },
+                { code: "FFMAX70", name: "70 Diamonds", price: 9499, displayName: "70 (62+8) Diamonds", bonusText: "+8 Bonus" },
+                { code: "FFMAX140", name: "140 Diamonds", price: 18999, displayName: "140 (125+15) Diamonds", bonusText: "+15 Bonus" },
+                { code: "FFMAX355", name: "355 Diamonds", price: 47499, displayName: "355 (310+45) Diamonds", bonusText: "+45 Bonus" },
+                { code: "FFMAX720", name: "720 Diamonds", price: 94999, displayName: "720 (625+95) Diamonds", bonusText: "+95 Bonus" }
               ]},
-            { id: "pubg", name: "PUBG Mobile", dev: "Tencent Games", image: "pubg depan.webp", icon: "🎯",
+            { id: "pubg", name: "PUBG Mobile", dev: "Tencent Games", image: "pubg depan.webp", icon: "🎯", banner: "banner-pubg.webp",
               products: [
-                { code: "UC60", name: "60 UC", price: 15999 },{ code: "UC325", name: "325 UC", price: 79999 },
-                { code: "UC660", name: "660 UC", price: 159999 },{ code: "UC1800", name: "1800 UC", price: 399999 }
+                { code: "UC60", name: "60 UC", price: 15999, displayName: "60 UC", bonusText: "" },
+                { code: "UC60L", name: "60 UC (Limited)", price: 15899, displayName: "60 UC", bonusText: "Limited" },
+                { code: "UC325", name: "325 UC", price: 79999, displayName: "325 UC", bonusText: "" },
+                { code: "UC660", name: "660 UC", price: 159999, displayName: "660 UC", bonusText: "" },
+                { code: "UC1800", name: "1800 UC", price: 399999, displayName: "1800 UC", bonusText: "" },
+                { code: "UC3850", name: "3850 UC", price: 799999, displayName: "3850 UC", bonusText: "" },
+                { code: "UC8100", name: "8100 UC", price: 1599999, displayName: "8100 UC", bonusText: "" },
+                { code: "UC8100L", name: "8100 UC (Limited)", price: 1589999, displayName: "8100 UC", bonusText: "Limited" }
               ]},
-            { id: "blood", name: "Blood Strike", dev: "NetEase", image: "Blood Strike depan.webp", icon: "🩸",
+            { id: "blood", name: "Blood Strike", dev: "NetEase", image: "Blood Strike depan.webp", icon: "🩸", banner: "banner-bloodstrike.webp",
               products: [
-                { code: "BS105", name: "100+5 Gold", price: 12290 },{ code: "BS320", name: "300+20 Gold", price: 36868 },
-                { code: "BS540", name: "500+40 Gold", price: 61446 }
+                { code: "BS105", name: "100+5 Gold", price: 12290, displayName: "100+5 Gold", bonusText: "+5 Bonus" },
+                { code: "BS320", name: "300+20 Gold", price: 36868, displayName: "300+20 Gold", bonusText: "+20 Bonus" },
+                { code: "BS540", name: "500+40 Gold", price: 61446, displayName: "500+40 Gold", bonusText: "+40 Bonus" }
               ]},
-            { id: "valorant", name: "Valorant", dev: "Riot Games", image: "valoran depan.webp", icon: "🔫",
+            { id: "valorant", name: "Valorant", dev: "Riot Games", image: "valoran depan.webp", icon: "🔫", banner: "banner-valorant.webp",
               products: [
-                { code: "VAL475", name: "475 Points", price: 54999 },{ code: "VAL1000", name: "1000 Points", price: 107999 },
-                { code: "VAL2050", name: "2050 Points", price: 217999 }
+                { code: "VAL475", name: "475 Points", price: 54999, displayName: "475 Points", bonusText: "" },
+                { code: "VAL1000", name: "1000 Points", price: 107999, displayName: "1000 Points", bonusText: "" },
+                { code: "VAL2050", name: "2050 Points", price: 217999, displayName: "2050 Points", bonusText: "" }
               ]},
-            { id: "arena", name: "Arena Breakout", dev: "Level Infinite", image: "arena depan.webp", icon: "🛡️",
+            { id: "arena", name: "Arena Breakout", dev: "Level Infinite", image: "arena depan.webp", icon: "🛡️", banner: "banner-arena-breakout.webp",
               products: [
-                { code: "AB66", name: "66 Bonds", price: 14450 },{ code: "AB335", name: "335 Bonds", price: 70550 },
-                { code: "AB675", name: "675 Bonds", price: 141100 }
+                { code: "AB66", name: "66 Bonds", price: 14450, displayName: "66 Bonds", bonusText: "" },
+                { code: "AB335", name: "335 Bonds", price: 70550, displayName: "335 Bonds", bonusText: "" },
+                { code: "AB675", name: "675 Bonds", price: 141100, displayName: "675 Bonds", bonusText: "" }
               ]}
         ];
         
-        const trendingGames = games.slice(0, 6);
+        const flashSaleProducts = [
+            { id: "ff140limited", name: "140 Diamonds - (Limited)", game: "Free Fire", gameId: "ff", currentPrice: 18099, originalPrice: 20000, discount: 10, sold: 377, totalStock: 499, code: "FF140L" },
+            { id: "ff355limited", name: "355 Diamond - (Limited)", game: "Free Fire", gameId: "ff", currentPrice: 45199, originalPrice: 50000, discount: 10, sold: 2, totalStock: 50, code: "FF355L" },
+            { id: "ff720limited", name: "720 Diamonds - (Limited)", game: "Free Fire", gameId: "ff", currentPrice: 90999, originalPrice: 100000, discount: 9, sold: 142, totalStock: 199, code: "FF720L" },
+            { id: "wpdlimited", name: "Weekly Diamond (Limited)", game: "Mobile Legends", gameId: "ml", currentPrice: 27400, originalPrice: 30000, discount: 9, sold: 0, totalStock: 0, code: "WP1" }
+        ];
+        
+        const testimonials = [
+            { name: "Andi Saputra", game: "Mobile Legends", rating: 5, text: "Proses super cepat, diamond langsung masuk! Recommended banget!", avatar: "A" },
+            { name: "Budi Setiawan", game: "Free Fire", rating: 5, text: "Harga murah, admin ramah, top up berulang kali di sini.", avatar: "B" },
+            { name: "Citra Amelia", game: "PUBG Mobile", rating: 5, text: "Pelayanan terbaik, UC termurah se-Indonesia.", avatar: "C" }
+        ];
         
         let currentGame = null;
         let selectedProduct = null;
         let selectedMethod = "QRIS";
         
-        // SLIDER CLASS
         class Slider {
             constructor(containerId, trackId, prevId, nextId, dotsId, autoPlay = true) {
                 this.track = document.getElementById(trackId);
@@ -595,35 +1119,132 @@
             resetAutoPlay() { if (this.autoPlay) { clearInterval(this.interval); this.startAutoPlay(); } }
         }
         
-        // RENDER FUNCTIONS
-        function renderTrending() {
-            const container = document.getElementById('trendingGrid');
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const msgSpan = document.getElementById('notificationMessage');
+            msgSpan.innerText = message;
+            notification.classList.add('show');
+            setTimeout(() => { notification.classList.remove('show'); }, 3000);
+        }
+        
+        function renderFlashSale() {
+            const container = document.getElementById('flashSaleGrid');
             if (!container) return;
-            container.innerHTML = trendingGames.map(game => `
-                <div class="trending-item cursor-pointer" onclick="goToGameDetail('${game.id}')">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-[#1a1d24] rounded-xl flex items-center justify-center text-xl">${game.icon}</div>
-                        <div>
-                            <div class="font-bold text-sm">${game.name}</div>
-                            <div class="text-xs text-slate-500">${game.dev}</div>
-                        </div>
+            container.innerHTML = flashSaleProducts.map(product => `
+                <div class="flash-sale-card">
+                    <div class="flash-sale-badge">⚡ FLASH SALE</div>
+                    <div class="flash-sale-title">${product.name}</div>
+                    <div class="flash-sale-game">${product.game}</div>
+                    <div class="flash-sale-price">
+                        <span class="flash-sale-current">Rp ${product.currentPrice.toLocaleString('id-ID')}</span>
+                        <span class="flash-sale-original">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
                     </div>
+                    <div class="flash-sale-discount">🔥 Hemat Rp ${(product.originalPrice - product.currentPrice).toLocaleString('id-ID')}</div>
+                    <div class="flash-sale-stock">
+                        ${product.sold} / ${product.totalStock} purchased
+                    </div>
+                    <button class="flash-sale-btn" onclick="goToFlashSaleProduct('${product.gameId}', '${product.code}')">
+                        <i class="fa-solid fa-bolt"></i> Beli Sekarang
+                    </button>
                 </div>
             `).join('');
         }
         
-        function renderGames() {
+        function goToFlashSaleProduct(gameId, productCode) {
+            goToGameDetail(gameId);
+            setTimeout(() => {
+                const productCard = document.querySelector(`.product-card[data-product-code="${productCode}"]`);
+                if (productCard) productCard.click();
+            }, 300);
+        }
+        
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialGrid');
+            if (!container) return;
+            container.innerHTML = testimonials.map(t => `
+                <div class="bg-[#111317] border border-[#1f232a] rounded-xl p-4 hover:border-amber-500 transition">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-amber-500/20 rounded-full flex items-center justify-center font-bold text-amber-500">${t.avatar}</div>
+                        <div><div class="font-bold">${t.name}</div><div class="text-xs text-slate-500">${t.game}</div></div>
+                    </div>
+                    <div class="text-amber-500 mb-2">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
+                    <p class="text-sm text-slate-400">"${t.text}"</p>
+                </div>
+            `).join('');
+        }
+        
+        function initCountdown() {
+            let targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 2);
+            targetDate.setHours(23, 59, 59, 999);
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+                if (diff <= 0) {
+                    document.getElementById('countdownDays').innerText = '00';
+                    document.getElementById('countdownHours').innerText = '00';
+                    document.getElementById('countdownMinutes').innerText = '00';
+                    document.getElementById('countdownSeconds').innerText = '00';
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (86400000)) / (3600000));
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
+                document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
+                document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        function renderGames(filterText = '') {
             const container = document.getElementById('gameGrid');
             if (!container) return;
-            container.innerHTML = games.map(game => `
+            const filtered = games.filter(g => g.name.toLowerCase().includes(filterText.toLowerCase()));
+            container.innerHTML = filtered.map(game => `
                 <div class="game-card cursor-pointer text-center" onclick="goToGameDetail('${game.id}')">
-                    <div class="game-image-wrapper">
-                        <img class="game-image" src="${game.image}" alt="${game.name}" onerror="this.src='https://placehold.co/300x150/1f2937/f5a623?text=${game.name}'">
-                    </div>
+                    <div class="game-image-wrapper"><img class="game-image" src="${game.image}" alt="${game.name}" onerror="this.src='https://placehold.co/300x150/1f2937/f5a623?text=${game.name}'"></div>
                     <div class="font-bold text-sm mt-2">${game.name}</div>
                     <div class="text-xs text-slate-500">${game.dev}</div>
                 </div>
             `).join('');
+        }
+        
+        function setupTopSearch() {
+            const searchInput = document.getElementById('searchGameTop');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    if (document.getElementById('homePage').style.display !== 'none') {
+                        renderGames(e.target.value);
+                    }
+                });
+            }
+        }
+        
+        function renderGameDetailHero() {
+            const container = document.getElementById('gameDetailHero');
+            if (!container) return;
+            container.innerHTML = `
+                <div class="game-info-section bg-[#111317] border border-[#1f232a] rounded-2xl p-4 -mt-16 relative z-10">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-32 h-32 md:w-44 md:h-44 rounded-xl overflow-hidden bg-[#1a1d24] border-2 border-amber-500 flex-shrink-0 -mt-20 md:-mt-28 shadow-xl">
+                            <img src="${currentGame.image}" alt="${currentGame.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h2 class="text-2xl font-bold text-white">${currentGame.name.toUpperCase()}</h2>
+                            <p class="text-gray-400 text-sm">${currentGame.dev}</p>
+                            <div class="flex flex-wrap gap-3 mt-3">
+                                <div class="flex items-center gap-1.5 bg-[#1a1d24] py-1.5 px-3 rounded-full text-xs"><i class="fa-solid fa-bolt text-amber-500"></i> Proses Cepat</div>
+                                <div class="flex items-center gap-1.5 bg-[#1a1d24] py-1.5 px-3 rounded-full text-xs"><i class="fa-regular fa-message text-purple-400"></i> Layanan Chat 24/7</div>
+                                <div class="flex items-center gap-1.5 bg-[#1a1d24] py-1.5 px-3 rounded-full text-xs"><i class="fa-solid fa-circle-check text-blue-400"></i> Pembayaran Aman!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         
         function goToGameDetail(gameId) {
@@ -636,51 +1257,52 @@
             document.getElementById('leaderboardPage').style.display = 'none';
             document.getElementById('artikelPage').style.display = 'none';
             document.getElementById('kalkulatorPage').style.display = 'none';
-            
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             
-            // Tampilkan banner khusus Free Fire jika ada
-            const ffBannerContainer = document.getElementById('ffSpecialBanner');
-            if (currentGame.specialBanner) {
-                ffBannerContainer.innerHTML = `
-                    <div class="ff-banner">
-                        <img src="${currentGame.specialBanner}" alt="Free Fire Promo" onerror="this.src='https://placehold.co/1200x300/ff4d4d/f5a623?text=FREE+FIRE+PROMO+50%25'">
-                    </div>
-                `;
+            const bannerContainer = document.getElementById('gameDetailBanner');
+            if (currentGame.banner) {
+                bannerContainer.innerHTML = `<div class="w-full rounded-2xl overflow-hidden"><img src="${currentGame.banner}" alt="${currentGame.name}" class="w-full h-48 md:h-64 object-cover object-center"></div>`;
+            } else if (currentGame.specialBanner) {
+                bannerContainer.innerHTML = `<div class="w-full rounded-2xl overflow-hidden"><img src="${currentGame.specialBanner}" alt="Free Fire" class="w-full h-48 md:h-64 object-cover object-center"></div>`;
             } else {
-                ffBannerContainer.innerHTML = '';
+                bannerContainer.innerHTML = '';
             }
+            
+            renderGameDetailHero();
             
             const container = document.getElementById('gameDetailContent');
             container.innerHTML = `
-                <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-6">
-                    <div class="flex flex-col md:flex-row gap-6 items-center">
-                        <div class="w-24 h-24 rounded-2xl overflow-hidden bg-[#1a1d24] flex items-center justify-center">
-                            <img src="${currentGame.image}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/1f2937/f5a623?text=${currentGame.name}'">
-                        </div>
-                        <div class="flex-1 text-center md:text-left">
-                            <h2 class="text-2xl md:text-3xl font-bold">${currentGame.name}</h2>
-                            <p class="text-amber-500 text-sm mt-1">${currentGame.dev}</p>
-                            <p class="text-slate-400 text-sm mt-2">Top up ${currentGame.name} dengan harga termurah dan proses super cepat!</p>
-                        </div>
-                    </div>
+                <div class="bg-gradient-to-r from-amber-600/20 to-slate-900 border border-amber-500/20 rounded-2xl p-4 mt-2">
+                    <p class="text-slate-300 text-sm">Top up ${currentGame.name} dengan harga termurah dan proses super cepat! Dapatkan bonus menarik setiap pembelian.</p>
                 </div>
             `;
-            
             renderProducts();
             document.getElementById('userId').value = '';
             document.getElementById('zoneId').value = '';
             document.getElementById('totalPrice').innerText = 'Rp 0';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         function renderProducts() {
             const container = document.getElementById('productGrid');
             if (!container || !currentGame) return;
+            if (!currentGame.products || currentGame.products.length === 0) {
+                container.innerHTML = '<div class="col-span-4 text-center text-slate-500 py-8">Belum ada produk untuk game ini</div>';
+                return;
+            }
             container.innerHTML = currentGame.products.map(product => `
                 <div class="product-card" data-product-code="${product.code}" data-product-name="${product.name}" data-product-price="${product.price}">
-                    <div class="font-bold text-amber-500">${product.code}</div>
-                    <div class="text-xs text-slate-400 mt-1">${product.name}</div>
-                    <div class="text-sm font-bold text-white mt-2">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fa-regular fa-gem text-blue-400 text-sm"></i>
+                        <div class="font-bold text-white text-sm">${product.displayName}</div>
+                    </div>
+                    ${product.bonusText ? `<div class="text-xs text-green-400 mb-1">${product.bonusText}</div>` : ''}
+                    <div class="text-orange-500 font-bold text-lg mt-1">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="product-badge">
+                        <i class="fa-solid fa-bolt text-[10px]"></i>
+                        <span>Fast Process</span>
+                    </div>
                 </div>
             `).join('');
             
@@ -688,10 +1310,7 @@
                 card.addEventListener('click', () => {
                     document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
                     card.classList.add('active');
-                    selectedProduct = {
-                        name: card.dataset.productName,
-                        price: parseInt(card.dataset.productPrice)
-                    };
+                    selectedProduct = { name: card.dataset.productName, price: parseInt(card.dataset.productPrice) };
                     document.getElementById('totalPrice').innerText = 'Rp ' + selectedProduct.price.toLocaleString('id-ID');
                 });
             });
@@ -707,9 +1326,10 @@
             document.querySelector('.menu-item[data-page="home"]').classList.add('active');
             currentGame = null;
             selectedProduct = null;
+            renderGames();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // SETUP FUNCTIONS
         function setupPaymentMethods() {
             document.querySelectorAll('.payment-method').forEach(method => {
                 method.addEventListener('click', () => {
@@ -725,66 +1345,22 @@
             const btn = document.getElementById('submitOrderBtn');
             if (!btn) return;
             btn.addEventListener('click', () => {
-                if (!currentGame) { alert("⚠️ Pilih game terlebih dahulu!"); return; }
+                if (!currentGame) { alert("Pilih game terlebih dahulu!"); return; }
                 const userId = document.getElementById('userId').value;
-                if (!userId) { alert("⚠️ Masukkan User ID Anda!"); return; }
-                if (!selectedProduct) { alert("⚠️ Pilih produk terlebih dahulu!"); return; }
-                
+                if (!userId) { alert("Masukkan User ID Anda!"); return; }
+                if (!selectedProduct) { alert("Pilih produk terlebih dahulu!"); return; }
                 const zoneId = document.getElementById('zoneId').value;
                 const zoneText = zoneId ? ` (Zone: ${zoneId})` : "";
-                const message = `Halo OKTA STORE, saya mau top up.%0A%0A` +
-                    `🎮 Game: ${currentGame.name}%0A` +
-                    `🆔 ID Player: ${userId}${zoneText}%0A` +
-                    `📦 Produk: ${selectedProduct.name}%0A` +
-                    `💰 Metode: ${selectedMethod}%0A` +
-                    `📱 Total: Rp ${selectedProduct.price.toLocaleString('id-ID')}%0A%0A` +
-                    `Mohon diproses. Terima kasih! 🙏`;
-                
+                const message = `Halo OKTA STORE, saya mau top up.%0A%0A🎮 Game: ${currentGame.name}%0A🆔 ID Player: ${userId}${zoneText}%0A📦 Produk: ${selectedProduct.name}%0A💰 Metode: ${selectedMethod}%0A📱 Total: Rp ${selectedProduct.price.toLocaleString('id-ID')}%0A%0AMohon diproses. Terima kasih!`;
                 window.open(`https://wa.me/${WHATSAPP_ADMIN}?text=${message}`, '_blank');
-                
+                const orderId = 'OKTA' + Date.now();
                 const history = JSON.parse(localStorage.getItem('okta_history') || '[]');
-                history.unshift({ 
-                    game: currentGame.name, 
-                    product: selectedProduct.name, 
-                    price: selectedProduct.price, 
-                    method: selectedMethod, 
-                    date: new Date().toLocaleString('id-ID'), 
-                    orderId: 'OKTA' + Date.now(),
-                    userId: userId
-                });
+                history.unshift({ game: currentGame.name, product: selectedProduct.name, price: selectedProduct.price, method: selectedMethod, date: new Date().toLocaleString('id-ID'), orderId: orderId, userId: userId, zoneId: zoneId, status: 'Pending' });
                 localStorage.setItem('okta_history', JSON.stringify(history.slice(0, 20)));
-            });
-        }
-        
-        function setupNavigation() {
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const page = item.dataset.page;
-                    
-                    document.getElementById('homePage').style.display = 'none';
-                    document.getElementById('gameDetailPage').style.display = 'none';
-                    document.getElementById('cekTransaksiPage').style.display = 'none';
-                    document.getElementById('leaderboardPage').style.display = 'none';
-                    document.getElementById('artikelPage').style.display = 'none';
-                    document.getElementById('kalkulatorPage').style.display = 'none';
-                    
-                    if (page === 'home') {
-                        document.getElementById('homePage').style.display = 'block';
-                    } else if (page === 'cek-transaksi') {
-                        document.getElementById('cekTransaksiPage').style.display = 'block';
-                    } else if (page === 'leaderboard') {
-                        document.getElementById('leaderboardPage').style.display = 'block';
-                        renderLeaderboard();
-                    } else if (page === 'artikel') {
-                        document.getElementById('artikelPage').style.display = 'block';
-                        renderArtikel();
-                    } else if (page === 'kalkulator') {
-                        document.getElementById('kalkulatorPage').style.display = 'block';
-                    }
-                    
-                    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-                    item.classList.add('active');
-                });
+                showNotification(`Pesanan berhasil! Order ID: ${orderId}`);
+                let customerCount = parseInt(localStorage.getItem('customerCount') || '0') + 1;
+                localStorage.setItem('customerCount', customerCount);
+                document.getElementById('customerCount').innerText = (10000 + customerCount).toLocaleString('id-ID') + '+';
             });
         }
         
@@ -793,27 +1369,14 @@
             const leaderboard = [];
             history.forEach(order => {
                 const existing = leaderboard.find(l => l.userId === order.userId);
-                if (existing) {
-                    existing.total += order.price;
-                } else {
-                    leaderboard.push({ userId: order.userId || 'User', total: order.price });
-                }
+                if (existing) existing.total += order.price;
+                else leaderboard.push({ userId: order.userId || 'User', total: order.price });
             });
             leaderboard.sort((a, b) => b.total - a.total);
-            
             const container = document.getElementById('leaderboardList');
             if (!container) return;
-            if (leaderboard.length === 0) {
-                container.innerHTML = '<div class="p-4 text-center text-slate-500">Belum ada data leaderboard</div>';
-                return;
-            }
-            container.innerHTML = leaderboard.slice(0, 10).map((item, idx) => `
-                <div class="grid grid-cols-3 gap-4 p-4 border-b border-[#1f232a]">
-                    <div class="font-bold ${idx < 3 ? 'text-amber-500' : 'text-white'}">${idx + 1}</div>
-                    <div>${item.userId.substring(0, 15)}${item.userId.length > 15 ? '...' : ''}</div>
-                    <div class="text-amber-500">Rp ${item.total.toLocaleString('id-ID')}</div>
-                </div>
-            `).join('');
+            if (leaderboard.length === 0) { container.innerHTML = '<div class="p-4 text-center text-slate-500">Belum ada data leaderboard</div>'; return; }
+            container.innerHTML = leaderboard.slice(0, 10).map((item, idx) => `<div class="grid grid-cols-3 gap-4 p-4 border-b border-[#1f232a]"><div class="font-bold ${idx < 3 ? 'text-amber-500' : 'text-white'}">${idx + 1}</div><div>${item.userId.substring(0, 15)}${item.userId.length > 15 ? '...' : ''}</div><div class="text-amber-500">Rp ${item.total.toLocaleString('id-ID')}</div></div>`).join('');
         }
         
         function renderArtikel() {
@@ -825,38 +1388,19 @@
             ];
             const container = document.getElementById('artikelList');
             if (!container) return;
-            container.innerHTML = articles.map(article => `
-                <div class="bg-[#111317] border border-[#1f232a] rounded-xl p-4 hover:border-amber-500 transition">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 bg-[#1a1d24] rounded-xl flex items-center justify-center text-xl">${article.icon}</div>
-                        <div>
-                            <div class="font-bold">${article.title}</div>
-                            <div class="text-xs text-slate-500">${article.date}</div>
-                        </div>
-                    </div>
-                    <p class="text-sm text-slate-400">${article.desc}</p>
-                    <button class="text-amber-500 text-xs mt-2 hover:underline">Baca selengkapnya →</button>
-                </div>
-            `).join('');
+            container.innerHTML = articles.map(article => `<div class="bg-[#111317] border border-[#1f232a] rounded-xl p-4 hover:border-amber-500 transition"><div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-[#1a1d24] rounded-xl flex items-center justify-center text-xl">${article.icon}</div><div><div class="font-bold">${article.title}</div><div class="text-xs text-slate-500">${article.date}</div></div></div><p class="text-sm text-slate-400">${article.desc}</p><button class="text-amber-500 text-xs mt-2 hover:underline">Baca selengkapnya →</button></div>`).join('');
         }
         
         function setupCalculator() {
             const calcNominal = document.getElementById('calcNominal');
             const calcGame = document.getElementById('calcGame');
             const calcResult = document.getElementById('calcResult');
-            
             function calculate() {
                 const nominal = parseInt(calcNominal.value) || 0;
                 const game = calcGame.value;
-                let rate = 1;
-                if (game === 'ml') rate = 0.0038;
-                else if (game === 'ff') rate = 0.007;
-                else if (game === 'pubg') rate = 0.0037;
-                else if (game === 'valorant') rate = 0.0036;
-                const result = Math.floor(nominal * rate);
-                calcResult.innerText = result.toLocaleString('id-ID');
+                let rate = game === 'ml' ? 0.0038 : game === 'ff' ? 0.007 : game === 'pubg' ? 0.0037 : 0.0036;
+                calcResult.innerText = Math.floor(nominal * rate).toLocaleString('id-ID');
             }
-            
             calcNominal.addEventListener('input', calculate);
             calcGame.addEventListener('change', calculate);
         }
@@ -870,33 +1414,60 @@
                 const order = history.find(h => h.orderId === orderId);
                 const resultDiv = document.getElementById('trackingResult');
                 if (order) {
-                    resultDiv.innerHTML = `
-                        <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
-                            <p class="text-green-400">✓ Pesanan ditemukan!</p>
-                            <p class="text-sm mt-2">Game: ${order.game}</p>
-                            <p class="text-sm">Produk: ${order.product}</p>
-                            <p class="text-sm">Total: Rp ${order.price.toLocaleString('id-ID')}</p>
-                            <p class="text-sm">Metode: ${order.method}</p>
-                            <p class="text-sm">Status: <span class="text-green-400">Sukses</span></p>
-                        </div>
-                    `;
+                    resultDiv.innerHTML = `<div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4"><p class="text-green-400">✓ Pesanan ditemukan!</p><p class="text-sm mt-2">Game: ${order.game}</p><p class="text-sm">Produk: ${order.product}</p><p class="text-sm">Total: Rp ${order.price.toLocaleString('id-ID')}</p><p class="text-sm">Metode: ${order.method}</p><p class="text-sm">Status: <span class="text-green-400">Sukses</span></p><p class="text-xs text-slate-500 mt-2">Order ID: ${order.orderId}</p></div>`;
                 } else {
-                    resultDiv.innerHTML = `
-                        <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
-                            <p class="text-red-400">✗ Pesanan tidak ditemukan</p>
-                            <p class="text-sm mt-2">Pastikan kode pesanan Anda benar.</p>
-                        </div>
-                    `;
+                    resultDiv.innerHTML = `<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4"><p class="text-red-400">✗ Pesanan tidak ditemukan</p><p class="text-sm mt-2">Pastikan kode pesanan Anda benar.</p></div>`;
                 }
             });
         }
         
+        function setupChat() {
+            const chatToggle = document.getElementById('chatToggle');
+            const chatWidget = document.getElementById('chatWidget');
+            const closeChat = document.getElementById('closeChat');
+            const sendBtn = document.getElementById('sendChatBtn');
+            const chatInput = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            chatToggle.addEventListener('click', () => chatWidget.classList.toggle('active'));
+            closeChat.addEventListener('click', () => chatWidget.classList.remove('active'));
+            sendBtn.addEventListener('click', () => {
+                const msg = chatInput.value.trim();
+                if (msg) {
+                    const userMsgDiv = document.createElement('div'); userMsgDiv.className = 'chat-message user'; userMsgDiv.innerText = msg; chatMessages.appendChild(userMsgDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight; chatInput.value = '';
+                    setTimeout(() => { const adminReply = document.createElement('div'); adminReply.className = 'chat-message admin'; adminReply.innerText = 'Terima kasih, pesan Anda akan segera direspon admin.'; chatMessages.appendChild(adminReply); chatMessages.scrollTop = chatMessages.scrollHeight; }, 1000);
+                }
+            });
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendBtn.click(); });
+        }
+        
+        function setupNavigation() {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const page = item.dataset.page;
+                    document.getElementById('homePage').style.display = 'none';
+                    document.getElementById('gameDetailPage').style.display = 'none';
+                    document.getElementById('cekTransaksiPage').style.display = 'none';
+                    document.getElementById('leaderboardPage').style.display = 'none';
+                    document.getElementById('artikelPage').style.display = 'none';
+                    document.getElementById('kalkulatorPage').style.display = 'none';
+                    if (page === 'home') { document.getElementById('homePage').style.display = 'block'; renderGames(); }
+                    else if (page === 'cek-transaksi') document.getElementById('cekTransaksiPage').style.display = 'block';
+                    else if (page === 'leaderboard') { document.getElementById('leaderboardPage').style.display = 'block'; renderLeaderboard(); }
+                    else if (page === 'artikel') { document.getElementById('artikelPage').style.display = 'block'; renderArtikel(); }
+                    else if (page === 'kalkulator') document.getElementById('kalkulatorPage').style.display = 'block';
+                    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+                    item.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        }
+        
         function setupModal() {
-            const loginBtn = document.getElementById('loginBtn');
+            const loginBtn = document.getElementById('loginBtnTop');
             const modal = document.getElementById('loginModal');
             const closeBtn = document.getElementById('closeModalBtn');
             const doLoginBtn = document.getElementById('doLoginBtn');
-            
             loginBtn.addEventListener('click', () => modal.classList.add('active'));
             closeBtn.addEventListener('click', () => modal.classList.remove('active'));
             modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
@@ -904,12 +1475,10 @@
                 const email = document.getElementById('loginEmail').value;
                 if (email) {
                     localStorage.setItem('okta_user', email);
-                    alert(`Selamat datang ${email}!`);
+                    showNotification(`Selamat datang ${email}!`);
                     modal.classList.remove('active');
                     loginBtn.innerHTML = `<i class="fa-regular fa-user"></i> ${email.substring(0, 15)}${email.length > 15 ? '...' : ''}`;
-                } else {
-                    alert("Masukkan email atau nomor WhatsApp!");
-                }
+                } else { alert("Masukkan email atau nomor WhatsApp!"); }
             });
         }
         
@@ -923,8 +1492,11 @@
         let mainSlider = null;
         
         function init() {
-            renderTrending();
             renderGames();
+            renderFlashSale();
+            renderTestimonials();
+            setupTopSearch();
+            initCountdown();
             setupNavigation();
             setupPaymentMethods();
             setupOrderButton();
@@ -932,7 +1504,13 @@
             setupModal();
             setupCalculator();
             setupTracking();
+            setupChat();
             mainSlider = new Slider('mainSlider', 'mainSliderTrack', 'mainSliderPrev', 'mainSliderNext', 'mainSliderDots', true);
+            window.goToGameDetail = goToGameDetail;
+            window.backToHome = backToHome;
+            window.goToFlashSaleProduct = goToFlashSaleProduct;
+            let customerCount = localStorage.getItem('customerCount');
+            if (customerCount) document.getElementById('customerCount').innerText = (10000 + parseInt(customerCount)).toLocaleString('id-ID') + '+';
         }
         
         init();
